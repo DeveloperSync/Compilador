@@ -1,0 +1,13 @@
+Generamos el fichero Java correspondiente del analizador léxico:
+ JLex calculadora.jlex
+•
+Renombramos el resultado a
+Yylex.java
+(recuerda que lo usábamos con ese nombre en elanalizador sintáctico, dentro del código que indica como se analizará el fichero):
+mv calculadora.jlex.java Yylex.java
+•
+Generamos los ficheros Java del analizador sintáctico:
+cup < calculadora.cup
+•
+Compilados todos los ficheros para generar el resultado:
+ javac -d . parser.java sym.java Yylex.java
