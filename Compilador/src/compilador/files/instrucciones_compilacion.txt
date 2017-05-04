@@ -7,7 +7,7 @@ Yylex.java
 mv calculadora.jlex.java Yylex.java
 •
 Generamos los ficheros Java del analizador sintáctico:
-cup < calculadora.cup
+cup  calculadora.cup
 •
 Compilados todos los ficheros para generar el resultado:
  javac -d . parser.java sym.java Yylex.java

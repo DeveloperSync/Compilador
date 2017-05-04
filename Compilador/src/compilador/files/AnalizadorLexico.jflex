@@ -30,7 +30,7 @@ NUMBER = [1-9][0-9]*
 /* yytext() está implícita en Jlex y devuelve el texto leído de la entrada y quecorresponde con el patron */
 
 {NUMBER} { 
-return new Symbol(sym.NUMERO, newInteger(yytext())); }
+return new Symbol(sym.NUMERO, new Integer(yytext())); }
 
 "+" { return new Symbol(sym.MAS); }
 "-" { return new Symbol(sym.MENOS); }
