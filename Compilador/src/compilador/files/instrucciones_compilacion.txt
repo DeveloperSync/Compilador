@@ -1,3 +1,6 @@
+/* calculadora.cup */
+/* http://www.academia.edu/4927379/JLex_y_Java_Cup_Instalacion_y_Ejemplo_2 */
+
 Generamos el fichero Java correspondiente del analizador léxico:
  JLex calculadora.jlex
 •

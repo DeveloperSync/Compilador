@@ -6,6 +6,11 @@ package compilador;
 // Thu May 04 17:33:23 CDT 2017
 //----------------------------------------------------
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java_cup.runtime.*;
 
 /** CUP v0.11a beta 20060608 generated parser.
@@ -116,13 +121,17 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
 
-        public static void main(String args[]) throws Exception {
-            // La clase Yylex es creada por el analizador léxico
-            // Jlex (ver sección siguiente).
-            new parser(new Yylex(System.in)).parse();
-        }
+  public void addFile(FileInputStream fileInputStream) throws Exception{
+      InputStream is= fileInputStream;
+      InputStreamReader r = new InputStreamReader(is);
+      BufferedReader br = new BufferedReader(r);
+      Yylex yylex = new Yylex(br);
+      new parser(yylex).parse();
+  }
 
 }
+
+
 
 /** Cup generated class to encapsulate user supplied action code.*/
 class CUP$parser$actions {
