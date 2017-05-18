@@ -556,7 +556,9 @@ public class Yylex implements java_cup.runtime.Scanner {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
             zzDoEOF();
-          {     { System.exit(0); }
+          {     { 
+              //System.exit(0); 
+          }
  }
       }
       else {

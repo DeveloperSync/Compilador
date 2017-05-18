@@ -21,7 +21,8 @@ public class Compilador {
         // TODO code application logic here
         
         parser parser = new parser();
-        parser.addFile(new FileInputStream("c:\\Users\\110243\\Documents\\compilador.txt"));
+        parser.addFile(new FileInputStream("c:\\Users\\noe.aguilar\\Documents\\compilador.txt"));
+        System.out.println(parser.toString());
       
     }
     
