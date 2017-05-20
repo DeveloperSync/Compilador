@@ -60,6 +60,14 @@ return new Symbol(sym.STRING, new String(yytext())); }
 "&" { return new Symbol(sym.AND); }
 "|" { return new Symbol(sym.OR); }
 
-.|\n { }
+/*TERMINALES PALABRAS RESERVADAS*/
+"clase" { return new Symbol(sym.CLASE); }
+"entero" { return new Symbol(sym.ENTERO); }
+"logic"{ return new Symbol(sym.LOGIC); }
+"flotante" { return new Symbol(sym.FLOTANTE); }
+"aislado"{ return new Symbol(sym.AISLADO); }
+
+
+/*.|\n { }*/
 
 /* *******************FIN EXPRESIONES REGULARES***************** */

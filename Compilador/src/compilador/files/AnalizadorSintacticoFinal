@@ -53,6 +53,11 @@ precedence left DIV;
     * expresiones separadas por un ';'
     */
 
+programa: declaracion_clase
+declaracion_clase: CLASE STRING cuerpo_clase
+cuerpo_clase: ABRELLAVE declaracion_metodo CIERRALLAVE
+declaracion_metodo: AISLADO STRING ABREPAR CIERRAPAR cuerpo
+
 expr_list ::= expr_list expr_part | expr_part;
 expr_part ::= expr_e:e {: System.out.println("= "+e); :} FIN;
 
