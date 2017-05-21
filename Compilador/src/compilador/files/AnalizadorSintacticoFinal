@@ -56,7 +56,19 @@ precedence left DIV;
 programa: declaracion_clase
 declaracion_clase: CLASE STRING cuerpo_clase
 cuerpo_clase: ABRELLAVE declaracion_metodo CIERRALLAVE
-declaracion_metodo: AISLADO STRING ABREPAR CIERRAPAR cuerpo
+
+declaracion_metodo: RUTINA STRING ABREPAR CIERRAPAR cuerpo_metodo
+declaracion_metodo: ENTERO STRING ABREPAR CIERRAPAR cuerpo_metodo
+declaracion_metodo: LOGIC STRING ABREPAR CIERRAPAR cuerpo_metodo
+declaracion_metodo: FLOTANTE STRING ABREPAR CIERRAPAR cuerpo_metodo
+cuerpo_metodo: ABRELLAVE declaracion_variables bloque_argumentos CIERRALLAVE
+declaracion_variables: declaracion_variables | declaracion_variables declaracion_variable
+declaracion_variable: tipo declararador_variable ;
+tipo: tipo_numerico
+tipo_numerico: ENTERO | FLOTANTE
+declarador_variable: STRING 
+
+
 
 expr_list ::= expr_list expr_part | expr_part;
 expr_part ::= expr_e:e {: System.out.println("= "+e); :} FIN;

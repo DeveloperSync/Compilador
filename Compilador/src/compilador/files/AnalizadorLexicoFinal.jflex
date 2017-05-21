@@ -65,7 +65,7 @@ return new Symbol(sym.STRING, new String(yytext())); }
 "entero" { return new Symbol(sym.ENTERO); }
 "logic"{ return new Symbol(sym.LOGIC); }
 "flotante" { return new Symbol(sym.FLOTANTE); }
-"aislado"{ return new Symbol(sym.AISLADO); }
+"rutina"{ return new Symbol(sym.RUTINA); }
 
 
 /*.|\n { }*/
