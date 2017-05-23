@@ -43,12 +43,16 @@ return new Symbol(sym.STRING, new String(yytext())); }
 "-" { return new Symbol(sym.MENOS); }
 "*" { return new Symbol(sym.POR); }
 "/" { return new Symbol(sym.DIV); }
+":=" { return new Symbol(sym.IGUAL); }
+"." { return new Symbol(sym.PUNTO); }
 
 /*TERMINALES PARA SEPARADORES
 "(" { return new Symbol(sym.ABREPAR); }
 ")" { return new Symbol(sym.CIERRAPAR); }
 "{" { return new Symbol(sym.ABRELLAVE); }
 "}" { return new Symbol(sym.CIERRALLAVE); }
+"^"{ return new Symbol(sym.TEXTDEC);
+";"{ return new Symbol(sym.FINLINEA); }
 
 /*TERMINAL PARA FIN DE LINEA
 ">" { return new Symbol(sym.FINLINEA); }
@@ -66,6 +70,7 @@ return new Symbol(sym.STRING, new String(yytext())); }
 "logic"{ return new Symbol(sym.LOGIC); }
 "flotante" { return new Symbol(sym.FLOTANTE); }
 "rutina"{ return new Symbol(sym.RUTINA); }
+"texto"{ return new Symbol(sym.TEXTO); }
 
 
 /*.|\n { }*/

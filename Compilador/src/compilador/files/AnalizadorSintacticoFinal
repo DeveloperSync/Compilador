@@ -65,8 +65,22 @@ cuerpo_metodo: ABRELLAVE declaracion_variables bloque_argumentos CIERRALLAVE
 declaracion_variables: declaracion_variables | declaracion_variables declaracion_variable
 declaracion_variable: tipo declararador_variable ;
 tipo: tipo_numerico
+tipo: texto
 tipo_numerico: ENTERO | FLOTANTE
-declarador_variable: STRING 
+texto: TEXTO
+declarador_variable: identificador IGUAL literal
+bloque_argumentos: argumentos | bloque_argumentos argumentos
+argumentos: argumento FINLINEA
+argumento: expresion
+expresion: literal | identificador 
+
+
+
+declarador_variable: declaracion_numero | declaracion_texto
+declaracion_numero: declaracion_entero | declaracion_flotante
+declaracion_entero: STRING IGUAL NUMERO
+declaracion_flotante: STRING IGUAL NUMERO PUNTO NUMERO
+declaracion_texto: STRING IGUAL TEXTDEC STRING TEXTDEC
 
 
 
