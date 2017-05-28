@@ -51,7 +51,7 @@ return new Symbol(sym.STRING, new String(yytext())); }
 ")" { return new Symbol(sym.CIERRAPAR); }
 "{" { return new Symbol(sym.ABRELLAVE); }
 "}" { return new Symbol(sym.CIERRALLAVE); }
-"^"{ return new Symbol(sym.TEXTDEC);
+"%"{ return new Symbol(sym.TEXTDEC);
 ";"{ return new Symbol(sym.FINLINEA); }
 
 /*TERMINAL PARA FIN DE LINEA
