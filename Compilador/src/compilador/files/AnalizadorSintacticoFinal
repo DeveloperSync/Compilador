@@ -16,14 +16,33 @@ parser code {:
 :}
 
 /* Aquí especificamos los terminales del lenguaje. */
-terminal MAS, MENOS, POR, DIV, PARI, PARD, FIN;
 /**
     * Este terminal tiene un valor entero. Recuerda que le dábamos el valor
     * en el código del analizador léxico, al darle como parámetro un valor
     * entero al objeto Symbol.
 */
-terminal Integer NUMERO;
-terminal String String;
+terminal String MAS;
+terminal String MENOS;
+terminal String POR;
+terminal String DIV;
+terminal String IGUAL;
+terminal String PUNTO;
+terminal String ABREPAR;
+terminal String CIERRAPAR;
+terminal String ABRELLAVE;
+terminal String CIERRALLAVE;
+terminal String TEXTDEC;
+terminal String FINLINEA;
+terminal String AND;
+terminal String OR;
+terminal String CLASE;
+terminal String ENTERO;
+terminal String LOGIC;
+terminal String FLOTANTE;
+terminal String RUTINA;
+terminal String TEXTO;
+terminal String NUMERO;
+terminal String STRING;
 
 /* Lista de no terminales. */
 non terminal expr_list, expr_part;

@@ -54,12 +54,6 @@ return new Symbol(sym.STRING, new String(yytext())); }
 "%"{ return new Symbol(sym.TEXTDEC);
 ";"{ return new Symbol(sym.FINLINEA); }
 
-/*TERMINAL PARA FIN DE LINEA
-">" { return new Symbol(sym.FINLINEA); }
-
-/*TERMINAL PARA CONTINUAR PROGRAMANDO EN SIGUIENTE LINEA*/
-"@" { return new Symbol(sym.CODINGEXTENDIDO); }
-
 /*TERMINALES OPERACIONES LOGICAS*/
 "&" { return new Symbol(sym.AND); }
 "|" { return new Symbol(sym.OR); }
