@@ -1,0 +1,103 @@
+/* calculadora.cup */
+/* http://www.academia.edu/4927379/JLex_y_Java_Cup_Instalacion_y_Ejemplo_2 */
+
+/* Importamos las clases necesarias del paquete cup.jar */
+import java_cup.runtime.*;
+
+/**
+    * Aquí ponemos el código que se usará para comenzar a parsear la entrada.
+*/
+parser code {:
+        public static void main(String args[]) throws Exception {
+            // La clase Yylex es creada por el analizador léxico
+            // Jlex (ver sección siguiente).
+            new parser(new Yylex(System.in)).parse();
+        }
+:}
+
+/* Aquí especificamos los terminales del lenguaje. */
+/**
+    * Este terminal tiene un valor entero. Recuerda que le dábamos el valor
+    * en el código del analizador léxico, al darle como parámetro un valor
+    * entero al objeto Symbol.
+*/
+terminal MAS, MENOS, POR, DIV, IGUAL, PUNTO, ABREPAR, CIERRAPAR, ABRELLAVE, CIERRALLAVE, TEXTDEC, FINLINEA, AND, OR, CLASE, ENTERO, LOGIC, FLOTANTE, RUTINA, TEXTO, NUMERO, STRING;
+
+/* Lista de no terminales. */
+/**
+    * Aquí están los no terminales con valor entero, que son con los que
+    * podemos hacer cálculos, y podemos escribirlos de la forma expr_e:l
+    * (por ejemplo, no se podría hacer expr_list:l, ya que a ese no
+    * terminal no le damos valor.
+    */
+non terminal String programa;
+non terminal String declaracion_clase;
+non terminal String cuerpo_clase;
+non terminal String declaracion_metodo;
+non terminal String cuerpo_metodo;
+non terminal String declaracion_variables
+non terminal String declaracion_variable;
+non terminal String tipo;
+non terminal String texto;
+non terminal String declarador_variable;
+non terminal String cuerpo_metodo;
+non terminal String cuerpo_metodo;
+non terminal String cuerpo_metodo;
+non terminal String cuerpo_metodo;
+non terminal String tipo;
+non terminal String texto;
+non terminal String declaracion_numero;
+non terminal String declaracion_entero;
+non terminal String declaracion_flotante;
+non terminal String declaracion_texto;
+non terminal String bloque_argumentos;
+non terminal String argumentos;
+non terminal String argumento;
+non terminal String if_else;
+non terminal String expresion;
+
+
+/* Aquí especificamos la precedencia de los operadores. */
+precedence left MAS;
+precedence left MENOS;
+precedence left POR;
+precedence left DIV;
+
+/**
+    * Ahora comenzamos con las reglas de producción.
+    */
+
+/**
+    * Estas dos reglas son nuevas. Nos sirven para encadenar varias
+    * expresiones separadas por un ';'
+    */
+
+programa ::= declaracion_clase:a {: System.out.println("NombreClase" + a); :};
+declaracion_clase ::= CLASE STRING cuerpo_clase:a {: System.out.println("CuerpoClase" + a); :}; 
+cuerpo_clase ::= ABRELLAVE declaracion_metodo:a CIERRALLAVE {: System.out.println("DeclaracionMetodo" + a); :};
+declaracion_metodo ::= RUTINA STRING ABREPAR CIERRAPAR cuerpo_metodo:a {: System.out.println("CuerpoMetodo" + a); :} |
+                         ENTERO STRING ABREPAR CIERRAPAR cuerpo_metodo:a {: System.out.println("CuerpoMetodo" + a); |
+                         LOGIC STRING ABREPAR CIERRAPAR cuerpo_metodo:a {: System.out.println("CuerpoMetodo" + a); :};
+declaracion_metodo ::= FLOTANTE STRING ABREPAR CIERRAPAR cuerpo_metodo:a {: System.out.println("CuerpoMetodo" + a); :};
+cuerpo_metodo ::= ABRELLAVE declaracion_variables:a bloque_argumentos:b CIERRALLAVE {: System.out.println("DeclaracionVariable" + a); System.out.println("BloqueArgumentos" + b); :};
+declaracion_variables ::= declaracion_variables :a {: System.out.println("DeclaracionVariables" + a) :};
+                             | declaracion_variables:a declaracion_variable:b {: System.out.println("DeclaracionVariables" + a) :};
+declaracion_variable ::= tipo:a declararador_variable:b {: System.out.println("Tipo" + a); System.out.println("DeclaradorVariable" + b); :};
+tipo ::= tipo_numerico:a {: System.out.println("TipoNumerico" + a) |
+         texto:a {: System.out.println("Texto" + a) :};
+tipo_numerico ::= ENTERO | FLOTANTE;
+texto ::= TEXTO;
+declarador_variable ::= declaracion_numero:a {: System.out.println("DeclaracionNumero" + a) :}
+                         | declaracion_texto:a {: System.out.println("DeclaracionTexto" + a) :};
+declaracion_numero ::= declaracion_entero:a {: System.out.println("DeclaracionEntero" + a) :}
+                     | declaracion_flotante:a {: System.out.println("DeclaracionFlotante" + a) :};
+declaracion_entero ::= STRING IGUAL NUMERO;
+declaracion_flotante ::= STRING IGUAL NUMERO PUNTO NUMERO;
+declaracion_texto ::= STRING IGUAL TEXTDEC STRING TEXTDEC;
+bloque_argumentos ::= argumentos:a {: System.out.println("Argumentos" + a) :}
+                         | bloque_argumentos:a argumentos:b {: System.out.println("BloqueArgumentos" + a); System.out.println("Argumentos" + b) :};
+argumentos ::= argumento:a FINLINEA {: System.out.println("Argumento" + a) :};
+argumento ::= expresion:a :a {: System.out.println("Expresion" + a) :} |
+            argumento ::= if_else:a {: System.out.println("IfElse" + a) :};
+if_else ::= IF ABREPAR expresion:a CIERRAPAR ABRELLAVE argumentos:b CIERRALLAVE ELSE ABRELLAVE expresion:c CIERRALLAVE FINLINEA {: System.out.println("Expresion" + a); System.out.println("Argumentos" + b); System.out.println("Expresion" + c); :};
+expresion ::= NUMERO | STRING | NUMERO PUNTO NUMERO | declarador_variable | expresion MAS expresion | expresion MENOS  expresion | expresion POR expresion | expresion DIV expresion | (expresion);

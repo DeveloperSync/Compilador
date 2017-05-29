@@ -10,7 +10,7 @@
 /* *****************DIRECTIVAS JFLEX*************************** */
 /* Codigo a ejecutar una vez alcanzado el final del archivo */
 %eofval{
-    { System.exit(0); }
+    { "System.out.println("Analisis lexico terminado");"System.exit(0); }
 %eofval}
 /* trabajará conjuntamente con CUP  , y le servirálos tokens por demanda. Esto significa que este fichero no puede ejecutarse sólo. */
 
@@ -59,10 +59,12 @@ return new Symbol(sym.STRING, new String(yytext())); }
 /* TERMINALES PALABRAS RESERVADAS */
 "clase" { return new Symbol(sym.CLASE); }
 "entero" { return new Symbol(sym.ENTERO); }
-"logic" { return new Symbol(sym.LOGIC); }
+"logico" { return new Symbol(sym.LOGIC); }
 "flotante" { return new Symbol(sym.FLOTANTE); }
 "rutina" { return new Symbol(sym.RUTINA); }
 "texto" { return new Symbol(sym.TEXTO); }
+"hacer_si" { return new Symbol(sym.IF); }
+"hacer_sino" { return new Symbol(sym.ELSE); }
 
 
 .|\n { }
