@@ -1,25 +1,21 @@
 /* calculadora.jlex */
 /* http://www.academia.edu/4927379/JLex_y_Java_Cup_Instalacion_y_Ejemplo_2 */
-
 /* ********************SECCION CODIGO DE USUARIOS******************** */
 /* Se define la libreria que se va a usar en el tiempo de compilacion */
-import java_cup.runtime.Symbol;
-/* ********************FIN SECCION CODIGO DE USUARIOS**************** */
+    import java_cup.runtime.Symbol; 
 
 %%
+
 
 /* *****************DIRECTIVAS JFLEX*************************** */
 /* Codigo a ejecutar una vez alcanzado el final del archivo */
 %eofval{
-    { System.out.println("Fin del analisis lexico"); }
+    { System.exit(0); }
 %eofval}
-/* trabajará conjuntamente con
-CUP 
-, y le servirálos tokens por demanda. Esto significa que este fichero no puede ejecutarse sólo. */
-%cup
+/* trabajará conjuntamente con CUP  , y le servirálos tokens por demanda. Esto significa que este fichero no puede ejecutarse sólo. */
 
 %public
-
+%cup
 /* Macro para identificar los tokens de la expresion regular para numeros enteros */
 NUMERO = [1-9][0-9]*
 STRING = [A-z][A-z]*
@@ -38,7 +34,9 @@ return new Symbol(sym.NUMERO, new Integer(yytext())); }
 {STRING} { 
 return new Symbol(sym.STRING, new String(yytext())); }
 
-/*TERMINALES PARA OPERACIONES ARITMETICAS*/
+%%
+
+/* TERMINALES PARA OPERACIONES ARITMETICAS */
 "+" { return new Symbol(sym.MAS); }
 "-" { return new Symbol(sym.MENOS); }
 "*" { return new Symbol(sym.POR); }
@@ -46,27 +44,27 @@ return new Symbol(sym.STRING, new String(yytext())); }
 ":=" { return new Symbol(sym.IGUAL); }
 "." { return new Symbol(sym.PUNTO); }
 
-/*TERMINALES PARA SEPARADORES
+/* TERMINALES PARA SEPARADORES */
 "(" { return new Symbol(sym.ABREPAR); }
 ")" { return new Symbol(sym.CIERRAPAR); }
 "{" { return new Symbol(sym.ABRELLAVE); }
 "}" { return new Symbol(sym.CIERRALLAVE); }
-"%"{ return new Symbol(sym.TEXTDEC);
-";"{ return new Symbol(sym.FINLINEA); }
+"#" { return new Symbol(sym.TEXTDEC); }
+";" { return new Symbol(sym.FINLINEA); }
 
-/*TERMINALES OPERACIONES LOGICAS*/
+/* TERMINALES OPERACIONES LOGICAS */
 "&" { return new Symbol(sym.AND); }
 "|" { return new Symbol(sym.OR); }
 
-/*TERMINALES PALABRAS RESERVADAS*/
+/* TERMINALES PALABRAS RESERVADAS */
 "clase" { return new Symbol(sym.CLASE); }
 "entero" { return new Symbol(sym.ENTERO); }
-"logic"{ return new Symbol(sym.LOGIC); }
+"logic" { return new Symbol(sym.LOGIC); }
 "flotante" { return new Symbol(sym.FLOTANTE); }
-"rutina"{ return new Symbol(sym.RUTINA); }
-"texto"{ return new Symbol(sym.TEXTO); }
+"rutina" { return new Symbol(sym.RUTINA); }
+"texto" { return new Symbol(sym.TEXTO); }
 
 
-/*.|\n { }*/
+.|\n { }
 
 /* *******************FIN EXPRESIONES REGULARES***************** */
