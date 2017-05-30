@@ -1,0 +1,22 @@
+clase prueba{
+	entero test(){
+		entero variable:=30;
+		2/2;
+		2*2;
+		2-2;
+	}
+	flotante test()
+		entero variable:=30;
+		2/2;
+		2*2;
+		2-2;
+	
+	}
+flotante test(){
+		entero variable:=30;
+		2/2;
+		2*2;
+		2-2;
+	
+	
+}
