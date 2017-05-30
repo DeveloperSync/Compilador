@@ -21,7 +21,7 @@ parser code {:
     * en el código del analizador léxico, al darle como parámetro un valor
     * entero al objeto Symbol.
 */
-terminal MAS, MENOS, POR, DIV, IGUAL, PUNTO, ABREPAR, CIERRAPAR, ABRELLAVE, CIERRALLAVE, TEXTDEC, FINLINEA, AND, OR, CLASE, ENTERO, LOGIC, FLOTANTE, RUTINA, TEXTO, NUMERO, STRING;
+terminal Identificador, MAS, MENOS, POR, DIV, IGUAL, PUNTO, ABREPAR, CIERRAPAR, ABRELLAVE, CIERRALLAVE, TEXTDEC, FINLINEA, AND, OR, CLASE, ENTERO, LOGIC, FLOTANTE, RUTINA, TEXTO, NUMERO, IF, ELSE;
 
 /* Lista de no terminales. */
 /**
@@ -35,17 +35,12 @@ non terminal String declaracion_clase;
 non terminal String cuerpo_clase;
 non terminal String declaracion_metodo;
 non terminal String cuerpo_metodo;
-non terminal String declaracion_variables
+non terminal String declaracion_variables;
 non terminal String declaracion_variable;
 non terminal String tipo;
+non terminal String tipo_numerico;
 non terminal String texto;
 non terminal String declarador_variable;
-non terminal String cuerpo_metodo;
-non terminal String cuerpo_metodo;
-non terminal String cuerpo_metodo;
-non terminal String cuerpo_metodo;
-non terminal String tipo;
-non terminal String texto;
 non terminal String declaracion_numero;
 non terminal String declaracion_entero;
 non terminal String declaracion_flotante;
@@ -73,31 +68,5 @@ precedence left DIV;
     */
 
 programa ::= declaracion_clase:a {: System.out.println("NombreClase" + a); :};
-declaracion_clase ::= CLASE STRING cuerpo_clase:a {: System.out.println("CuerpoClase" + a); :}; 
-cuerpo_clase ::= ABRELLAVE declaracion_metodo:a CIERRALLAVE {: System.out.println("DeclaracionMetodo" + a); :};
-declaracion_metodo ::= RUTINA STRING ABREPAR CIERRAPAR cuerpo_metodo:a {: System.out.println("CuerpoMetodo" + a); :} |
-                         ENTERO STRING ABREPAR CIERRAPAR cuerpo_metodo:a {: System.out.println("CuerpoMetodo" + a); |
-                         LOGIC STRING ABREPAR CIERRAPAR cuerpo_metodo:a {: System.out.println("CuerpoMetodo" + a); :};
-declaracion_metodo ::= FLOTANTE STRING ABREPAR CIERRAPAR cuerpo_metodo:a {: System.out.println("CuerpoMetodo" + a); :};
-cuerpo_metodo ::= ABRELLAVE declaracion_variables:a bloque_argumentos:b CIERRALLAVE {: System.out.println("DeclaracionVariable" + a); System.out.println("BloqueArgumentos" + b); :};
-declaracion_variables ::= declaracion_variables :a {: System.out.println("DeclaracionVariables" + a) :};
-                             | declaracion_variables:a declaracion_variable:b {: System.out.println("DeclaracionVariables" + a) :};
-declaracion_variable ::= tipo:a declararador_variable:b {: System.out.println("Tipo" + a); System.out.println("DeclaradorVariable" + b); :};
-tipo ::= tipo_numerico:a {: System.out.println("TipoNumerico" + a) |
-         texto:a {: System.out.println("Texto" + a) :};
-tipo_numerico ::= ENTERO | FLOTANTE;
-texto ::= TEXTO;
-declarador_variable ::= declaracion_numero:a {: System.out.println("DeclaracionNumero" + a) :}
-                         | declaracion_texto:a {: System.out.println("DeclaracionTexto" + a) :};
-declaracion_numero ::= declaracion_entero:a {: System.out.println("DeclaracionEntero" + a) :}
-                     | declaracion_flotante:a {: System.out.println("DeclaracionFlotante" + a) :};
-declaracion_entero ::= STRING IGUAL NUMERO;
-declaracion_flotante ::= STRING IGUAL NUMERO PUNTO NUMERO;
-declaracion_texto ::= STRING IGUAL TEXTDEC STRING TEXTDEC;
-bloque_argumentos ::= argumentos:a {: System.out.println("Argumentos" + a) :}
-                         | bloque_argumentos:a argumentos:b {: System.out.println("BloqueArgumentos" + a); System.out.println("Argumentos" + b) :};
-argumentos ::= argumento:a FINLINEA {: System.out.println("Argumento" + a) :};
-argumento ::= expresion:a :a {: System.out.println("Expresion" + a) :} |
-            argumento ::= if_else:a {: System.out.println("IfElse" + a) :};
-if_else ::= IF ABREPAR expresion:a CIERRAPAR ABRELLAVE argumentos:b CIERRALLAVE ELSE ABRELLAVE expresion:c CIERRALLAVE FINLINEA {: System.out.println("Expresion" + a); System.out.println("Argumentos" + b); System.out.println("Expresion" + c); :};
-expresion ::= NUMERO | STRING | NUMERO PUNTO NUMERO | declarador_variable | expresion MAS expresion | expresion MENOS  expresion | expresion POR expresion | expresion DIV expresion | (expresion);
+declaracion_clase ::= CLASE Identificador:a cuerpo_clase {: System.out.println("CuerpoClase" + a); :}; 
+cuerpo_clase ::= ABRELLAVE CLASE:a CIERRALLAVE {: System.out.println("DeclaracionMetodo" + a); :};

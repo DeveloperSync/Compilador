@@ -17,8 +17,8 @@
 %public
 %cup
 /* Macro para identificar los tokens de la expresion regular para numeros enteros */
-NUMERO = [1-9][0-9]*
-STRING = [A-z][A-z]*
+/* NUMERO = [1-9][0-9]* */
+/* STRING = [A-z][A-z]* */
 /* ***************FIN DIRECTIVAS JFLEX********************** */
 
 %%
@@ -28,11 +28,6 @@ STRING = [A-z][A-z]*
 /* Debe devolverse un Symbol al analizador sintáctico que contenga el tipo de token (NUMERO) y su valor (new Integer(yytext())).La funcion */
 /* yytext() está implícita en Jlex y devuelve el texto leído de la entrada y quecorresponde con el patron */
 
-{NUMERO} { 
-return new Symbol(sym.NUMERO, new Integer(yytext())); }
-
-{STRING} { 
-return new Symbol(sym.STRING, new String(yytext())); }
 
 %%
 
@@ -47,8 +42,8 @@ return new Symbol(sym.STRING, new String(yytext())); }
 /* TERMINALES PARA SEPARADORES */
 "(" { return new Symbol(sym.ABREPAR); }
 ")" { return new Symbol(sym.CIERRAPAR); }
-"{" { return new Symbol(sym.ABRELLAVE); }
-"}" { return new Symbol(sym.CIERRALLAVE); }
+"{" { return new Symbol(sym.ABRELLAVE, yytext()); }
+"}" { return new Symbol(sym.CIERRALLAVE, yytext()); }
 "#" { return new Symbol(sym.TEXTDEC); }
 ";" { return new Symbol(sym.FINLINEA); }
 
@@ -57,14 +52,18 @@ return new Symbol(sym.STRING, new String(yytext())); }
 "|" { return new Symbol(sym.OR); }
 
 /* TERMINALES PALABRAS RESERVADAS */
-"clase" { return new Symbol(sym.CLASE); }
-"entero" { return new Symbol(sym.ENTERO); }
-"logico" { return new Symbol(sym.LOGIC); }
-"flotante" { return new Symbol(sym.FLOTANTE); }
-"rutina" { return new Symbol(sym.RUTINA); }
-"texto" { return new Symbol(sym.TEXTO); }
-"hacer_si" { return new Symbol(sym.IF); }
-"hacer_sino" { return new Symbol(sym.ELSE); }
+"clase" { return new Symbol(sym.CLASE, yytext()); }
+"entero" { return new Symbol(sym.ENTERO, yytext()); }
+"logico" { return new Symbol(sym.LOGIC, yytext()); }
+"flotante" { return new Symbol(sym.FLOTANTE, yytext()); }
+"rutina" { return new Symbol(sym.RUTINA, yytext()); }
+"texto" { return new Symbol(sym.TEXTO,yytext()); }
+"hacer_si" { return new Symbol(sym.IF, yytext()); }
+"hacer_sino" { return new Symbol(sym.ELSE, yytext()); }
+
+/* {NUMERO} { return new Symbol(sym.NUMERO, new Integer(yytext())); } */
+
+/* {STRING} { return new Symbol(sym.STRING, new String(yytext())); } */
 
 
 .|\n { }
